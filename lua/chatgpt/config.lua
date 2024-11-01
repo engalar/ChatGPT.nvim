@@ -179,7 +179,8 @@ function M.defaults()
       n = 1,
     },
     openai_edit_params = {
-      model = "gpt-3.5-turbo", --glm-4
+      model = "codegeex-4", --glm-4
+      -- model = "gpt-3.5-turbo", --glm-4
       frequency_penalty = 0,
       presence_penalty = 0,
       temperature = 0,

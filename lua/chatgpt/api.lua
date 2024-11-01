@@ -154,6 +154,7 @@ Api.handle_response = vim.schedule_wrap(function(response, exit_code, cb)
     cb("ERROR: API Error")
   end
 
+  logger.warn(response:result())
   local result = table.concat(response:result(), "\n")
   local json = vim.fn.json_decode(result)
   if json == nil then
@@ -305,7 +306,7 @@ end
 function Api.setup()
   loadOptionalConfig("OPENAI_API_HOST", "OPENAI_API_HOST", "api_host_cmd", function(host)
     Api.OPENAI_API_HOST = host
-    Api.COMPLETIONS_URL = ensureUrlProtocol(Api.OPENAI_API_HOST .. "/v4/completions")
+    Api.COMPLETIONS_URL = ensureUrlProtocol(Api.OPENAI_API_HOST .. "/v4/chat/completions")
     Api.CHAT_COMPLETIONS_URL = ensureUrlProtocol(Api.OPENAI_API_HOST .. "/v4/chat/completions")
     Api.EDITS_URL = ensureUrlProtocol(Api.OPENAI_API_HOST .. "/v4/edits")
   end, "open.bigmodel.cn/api/pass")
